@@ -1,8 +1,8 @@
 player = require('player') -- Call player functions
 enemy = require('enemy') -- Call enemy functions
+checkCollisions = require('checkcollisions') -- Call checkcollisions functions
 
 love.graphics.setDefaultFilter('nearest', 'nearest')
-
 
 function love.load()
     -- Music File
@@ -44,7 +44,7 @@ function love.update(dt)
         end
         b.y = b.y - 10
     end
-
+    checkCollisions(enemies_controller.enemies, player.bullets)
 
 end
 
