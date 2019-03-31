@@ -3,6 +3,8 @@ enemy = require('enemy') -- Call enemy functions
 checkCollisions = require('checkcollisions') -- Call checkcollisions functions
 particle_systems = require('particle_systems') -- Call particle_systems functions
 game = require('game') -- Call game functions
+bullets = require('bullets') -- Call bullets functions
+
 
 love.graphics.setDefaultFilter('nearest', 'nearest')
 
@@ -11,13 +13,13 @@ function love.load()
     local music = love.audio.newSource('music.mp3', 'stream')
     music:setLooping(true)
     love.audio.play(music)
-    
+
     -- Check game status
     game:status()
-    
+
     -- Background File
     background_image = love.graphics.newImage('background.png')
-    
+
     -- Load Enemy
     enemy:spawnEnemy()
 
@@ -71,12 +73,8 @@ function love.draw()
          love.graphics.draw(enemies_controller.image, e.x, e.y)
      end
 
-     -- Draw bullets
-     love.graphics.setColor(255, 255, 255)
-     for _,b in pairs(player.bullets) do
-         love.graphics.rectangle("fill", b.x, b.y, 2, 2)
-     end
 
-     -- Draw Particles to Screen
+     -- Draw Particles/Bullets to Screen
      particle_systems:draw()
+     bullets:draw()
 end
