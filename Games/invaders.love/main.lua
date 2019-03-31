@@ -2,6 +2,7 @@ player = require('player') -- Call player functions
 enemy = require('enemy') -- Call enemy functions
 checkCollisions = require('checkcollisions') -- Call checkcollisions functions
 particle_systems = require('particle_systems') -- Call particle_systems functions
+game = require('game') -- Call game functions
 
 love.graphics.setDefaultFilter('nearest', 'nearest')
 
@@ -10,17 +11,16 @@ function love.load()
     local music = love.audio.newSource('music.mp3', 'stream')
     music:setLooping(true)
     love.audio.play(music)
-
-    -- Game Results
-    game_over = false
-    game_win = false
-
+    
+    -- Check game status
+    game:status()
+    
     -- Background File
     background_image = love.graphics.newImage('background.png')
+    
+    -- Load Enemy
+    enemy:spawnEnemy()
 
-    for i=0, 10 do
-    enemies_controller:spawnEnemy(i * 15,0)
-    end
 end
 
 function love.update(dt)

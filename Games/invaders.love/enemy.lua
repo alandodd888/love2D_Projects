@@ -25,4 +25,10 @@ function enemy:fire()
   end
 end
 
+function enemy:spawnEnemy()
+  for i=0, 10 do
+    enemies_controller:spawnEnemy(i * 15,0)
+  end
+end
+
 return enemy
