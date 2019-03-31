@@ -1,6 +1,7 @@
 player = require('player') -- Call player functions
 enemy = require('enemy') -- Call enemy functions
 checkCollisions = require('checkcollisions') -- Call checkcollisions functions
+particle_systems = require('particle_systems') -- Call particle_systems functions
 
 love.graphics.setDefaultFilter('nearest', 'nearest')
 
@@ -20,10 +21,12 @@ function love.load()
     for i=0, 10 do
     enemies_controller:spawnEnemy(i * 15,0)
     end
-
 end
 
 function love.update(dt)
+    -- Particle Controls
+    particle_systems:update(dt)
+
     -- Player Controls
     player:movement()
 
@@ -45,7 +48,6 @@ function love.update(dt)
         b.y = b.y - 10
     end
     checkCollisions(enemies_controller.enemies, player.bullets)
-
 end
 
 function love.draw()
@@ -75,5 +77,6 @@ function love.draw()
          love.graphics.rectangle("fill", b.x, b.y, 2, 2)
      end
 
-
+     -- Draw Particles to Screen
+     particle_systems:draw()
 end
