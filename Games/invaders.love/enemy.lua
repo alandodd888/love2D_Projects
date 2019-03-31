@@ -31,4 +31,12 @@ function enemy:spawnEnemy()
   end
 end
 
+--function enemy:draw()
+--      love.graphics.setColor(255, 255, 255)
+--     for _,e in pairs(enemies_controller.enemies) do
+--         love.graphics.draw(enemies_controller.image, e.x, e.y)
+--     end
+--end
+
+
 return enemy

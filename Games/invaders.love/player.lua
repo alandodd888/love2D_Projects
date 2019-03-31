@@ -17,6 +17,7 @@ player.fire_sound = love.audio.newSource('Laser_Shoot2.wav', 'stream')
         end
     end
     
+-- player horizontal movement
 function player:movement()
   
     player.cooldown = player.cooldown - 1
@@ -31,6 +32,17 @@ function player:movement()
         player.fire()
     end
 end
+
+-- Player updates bullet shot
+function player:update()
+      for i,b in ipairs(player.bullets) do
+        if b.y < 30 then
+            table.remove(player.bullets, i)
+        end
+        b.y = b.y - 10
+    end
+end
+
 
 function player:draw()
       -- Draw the Player

@@ -15,7 +15,7 @@ function love.load()
     love.audio.play(music)
 
     -- Check game status
-    game:status()
+    game:load()
 
     -- Background File
     background_image = love.graphics.newImage('background.png')
@@ -43,12 +43,10 @@ function love.update(dt)
       e.y = e.y + 1 * e.speed
     end
 
-    for i,b in ipairs(player.bullets) do
-        if b.y < 30 then
-            table.remove(player.bullets, i)
-        end
-        b.y = b.y - 10
-    end
+    -- Player update
+    player:update()
+
+
     checkCollisions(enemies_controller.enemies, player.bullets)
 end
 
@@ -57,24 +55,20 @@ function love.draw()
     love.graphics.scale(5)
     love.graphics.draw(background_image, 0, 0)
 
-    -- Check game status
-    if game_over then
-      love.graphics.print("Game Over!")
-      return
-    elseif game_win then
-      love.graphics.print("You Won!")
-    end
+    -- draw game status
+    game:draw()
 
     -- Player Draw function
     player:draw()
 
-    love.graphics.setColor(255, 255, 255)
+      love.graphics.setColor(255, 255, 255)
      for _,e in pairs(enemies_controller.enemies) do
          love.graphics.draw(enemies_controller.image, e.x, e.y)
      end
 
 
-     -- Draw Particles/Bullets to Screen
-     particle_systems:draw()
-     bullets:draw()
+    -- Draw Particles/Bullets to Screen
+    particle_systems:draw()
+    bullets:draw()
+
 end
